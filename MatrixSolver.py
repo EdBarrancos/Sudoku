@@ -7,20 +7,69 @@ class Matrix:
                 Ax -> Part Ax of the matrix
                 b -> Part b of the matrix
 
-        Args:
-            lst -- list -- list of lists
+            Args:
+                lst -- list -- list of lists
         """
-        self.matrix = dict()
-        Ax = list()
-        b = list()
 
-        for value in lst:
-            Ax.append(value[:-1])
-            b.append(value[len(value) - 1])
+        ###########
+        #AUXILIARY#
+        ###########
 
-        self.matrix['Ax'] = Ax
-        self.matrix['b'] = b
-        
+        def verify_args(lst):
+            '''Verifies the arguments given to create the matrix
+
+                Args:
+                Same as the matrix
+
+                returns bool
+            '''
+
+            if isinstance(lst, list):
+                #The Argument has to be a list
+                size = 0
+
+                for line in lst:
+                    if isinstance(line, list):
+                        #Each Value in the main list also has to be a list
+                        if len(line) >= 2:
+                            #The list sizes have to be at least two or greater
+                            if size != 0:
+                                #The size variable is already set
+                                if len(line) == size:
+                                    #All lines have to have the same size
+                                    for index in range(len(line)):
+                                            if not isinstance(line[index], int):
+                                                #All the values have to be intengers
+                                                return False
+                                else:
+                                    #Not all lines have the same size
+                                    return False
+                            else:
+                                #Set the size variable
+                                size = len(line)                  
+                    else:
+                        #Not all the Values in the main list are lists
+                        return False
+            else:
+                #The Argument isn't a list
+                return False
+
+            #Passed all tests
+            return True
+
+        if verify_args(lst):
+            self.matrix = dict()
+            Ax = list()
+            b = list()
+
+            for value in lst:
+                Ax.append(value[:-1])
+                b.append(value[len(value) - 1])
+
+            self.matrix['Ax'] = Ax
+            self.matrix['b'] = b
+        else:
+            raise ValueError ("Matrix, __init__: argument not valid")
 
     def get_line(self, line):
         """Returns a line of the Matrix
@@ -62,6 +111,15 @@ class Matrix:
         
         return matrix_print[:-1]
 
+def is_matrix(matrix):
+    #NOT DONE
+    return False
+
+def clone_matrix(matrix):
+    #NOT DONE
+    return False
+
+    
 a = [0,1,0,4]
 
 b = [1,0,0,3]
@@ -203,3 +261,6 @@ def simplify(Matrix):
                 Matrix = calculate_line(i, Matrix)
     
     return Matrix
+
+def test():
+    return("SERFDDFDRFGVBGFRGFRF")
