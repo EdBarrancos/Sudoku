@@ -77,9 +77,9 @@ class Matrix:
         Args:
             line -- int -- number of the line
         
-        return a list with the values in the line
+        return a list 
         """
-        return [self.matrix['Ax'][line] + self.matrix['b'][line]]
+        return self.matrix['Ax'][line] + [self.matrix['b'][line]]
 
 
     def get_collumn(self, collumn_nbr):
@@ -88,19 +88,76 @@ class Matrix:
         Args:
             collumn_nbr -- int -- number of the collumn
 
-        return a string
+        return a list
         """
-        collumn = list()
-        for i in range(self.matrix['Ax']):
-            collumn.append(self.matrix['Ax'][i][collumn_nbr])
+        if collumn_nbr >= len(self.matrix['Ax'][0]):
+            return self.matrix['b']
+        else:
+            collumn = list()
+            for i in range(len(self.matrix['Ax'])):
+                collumn.append(self.matrix['Ax'][i][collumn_nbr])
 
-        return collumn
+            return collumn
+    
+
+    def get_size(self):
+        """The x and y size of the matrix
+
+        return a dict 
+        """
+        return {'y': len(self.get_collumn(0)),'x': len(self.matrix['Ax']) + 1}
+    
+
+    def change_line(line_nbr, new_line):
+        '''Changes destroctively the line in the line_nbr with new_line
+
+            Args:
+                line_nbr -- int -- number of the line to be changed
+                new_line -- list -- new line
+
+            return self
+        '''
+
+        new_matrix = list()
+        for index in range(self.get_size()['y']):
+            if index == line_nbr:
+                new_matrix.append(new_line)
+            else:
+                new_matrix.append(self.get_line(index))
+
+        self.__init__(new_matrix)
+        return self
 
     
+    def subtract(self,Li, Lj, ALPHA=1):
+        """ Changes destroctively the line Li
+                Li = Li - alpha * Lj
+
+            Args:
+                Li,Lj -- int -- number of the lines to be swithced
+                ALPHA -- int -- constant
+
+            return self
+        """
+        print(self.get_line(Li))
+        print()
+
+        for index in range(self.get_size()['x']):
+            self.get_line(Li)[index] -= ALPHA * self.get_line(Lj)[index]
+            # print(self.get_line(Li)[index])
+            print(self.get_line(Li)[index] - ALPHA * self.get_line(Lj)[index])
+        
+        print()
+        print(self.get_line(Li))
+
+
+        return self
+
+
     def __repr__(self):
         """The representation of the matrix
 
-        return a list with the values in the collumn
+        return a string
         """
         matrix_print = str()
         for line in range(len(self.matrix['Ax'])):
@@ -111,14 +168,21 @@ class Matrix:
         
         return matrix_print[:-1]
 
-def is_matrix(matrix):
-    #NOT DONE
-    return False
 
 def clone_matrix(matrix):
-    #NOT DONE
-    return False
+    '''Clones the Matrix given as argument
 
+    Args:
+        matrix -- Matrix
+
+    returns a Matrix
+    '''
+    lines = list()
+
+    for i in range(matrix.get_size()['y']):
+        lines.append(list(matrix.get_line(i)))
+
+    return Matrix(list(lines))
     
 a = [0,1,0,4]
 
@@ -126,29 +190,18 @@ b = [1,0,0,3]
 
 c = [0,1,2,7]
 
-matrix = Matrix([a,b,c])
-print(matrix)
+mx = Matrix([a,b,c])
+print(mx.get_size())
+print(clone_matrix(mx))
+print()
+mx.subtract(1, 2,)
+print(mx)
 
 
 
 ###############
 #TESTING STUFF#
 ###############
-
-def subtract(Li, Lj, alpha):
-    """ Li = Li - alpha*Lj
-
-        Args:
-            Li,Lj -- list -- lines of the matrix
-            alpha -- int -- number
-    """
-    if len(Li) != len(Lj):
-        return "Not same length"
-
-    for index in range(len(Li)):
-        Li[index] -=  alpha*Lj[index]
-
-
 
 def switch(Li, Lj, Matrix):
     """ Switches the position of Li and Lj in the Matrix
