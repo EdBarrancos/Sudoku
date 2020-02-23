@@ -1,4 +1,9 @@
-#Testing ideas
+############################################################################
+############################################################################
+
+########
+#MATRIX#
+########
 
 class Matrix:
     def __init__(self, lst):
@@ -91,6 +96,7 @@ class Matrix:
         return a list
         """
         if collumn_nbr >= len(self.matrix['Ax'][0]):
+            #Only the collumn with the results
             return self.matrix['b']
         else:
             collumn = list()
@@ -108,7 +114,7 @@ class Matrix:
         return {'y': len(self.get_collumn(0)),'x': len(self.matrix['Ax']) + 1}
     
 
-    def change_line(line_nbr, new_line):
+    def change_line(self, line_nbr, new_line):
         '''Changes destroctively the line in the line_nbr with new_line
 
             Args:
@@ -121,6 +127,7 @@ class Matrix:
         new_matrix = list()
         for index in range(self.get_size()['y']):
             if index == line_nbr:
+                #The line that needs changing
                 new_matrix.append(new_line)
             else:
                 new_matrix.append(self.get_line(index))
@@ -139,17 +146,10 @@ class Matrix:
 
             return self
         """
-        print(self.get_line(Li))
-        print()
-
+        new_line = list()
         for index in range(self.get_size()['x']):
-            self.get_line(Li)[index] -= ALPHA * self.get_line(Lj)[index]
-            # print(self.get_line(Li)[index])
-            print(self.get_line(Li)[index] - ALPHA * self.get_line(Lj)[index])
-        
-        print()
-        print(self.get_line(Li))
-
+            new_line.append(self.get_line(Li)[index] - ALPHA * self.get_line(Lj)[index])
+        self.change_line(Li, new_line)        
 
         return self
 
@@ -162,10 +162,10 @@ class Matrix:
         matrix_print = str()
         for line in range(len(self.matrix['Ax'])):
             for value in self.matrix['Ax'][line]:
-                matrix_print += str(value) + "|"
+                matrix_print += '{:3d}|'.format(value)
             
-            matrix_print += '|' + str(self.matrix['b'][line]) + '\n'
-        
+            matrix_print += '|{:4d}\n'.format(self.matrix['b'][line])
+        #Idea for development: Modify the format so it becames flexible
         return matrix_print[:-1]
 
 
@@ -183,6 +183,13 @@ def clone_matrix(matrix):
         lines.append(list(matrix.get_line(i)))
 
     return Matrix(list(lines))
+
+########
+#MATRIX#
+########
+
+############################################################################
+############################################################################
     
 a = [0,1,0,4]
 
@@ -191,13 +198,6 @@ b = [1,0,0,3]
 c = [0,1,2,7]
 
 mx = Matrix([a,b,c])
-print(mx.get_size())
-print(clone_matrix(mx))
-print()
-mx.subtract(1, 2,)
-print(mx)
-
-
 
 ###############
 #TESTING STUFF#
@@ -315,5 +315,3 @@ def simplify(Matrix):
     
     return Matrix
 
-def test():
-    return("SERFDDFDRFGVBGFRGFRF")
