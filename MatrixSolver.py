@@ -164,6 +164,21 @@ class Matrix:
         self.change_line(Li, new_line)        
 
         return self
+    
+
+    def switch(self, line1, line2):
+        '''Changes two lines
+        
+        Args:
+            line1, line2 -- int -- number of the lines to be switched
+
+        return self
+        '''
+        
+        self.matrix['Ax'][line1], self.matrix['Ax'][line2] = self.matrix['Ax'][line2], self.matrix['Ax'][line1]
+        self.matrix['b'][line1], self.matrix['b'][line2] = self.matrix['b'][line2], self.matrix['b'][line1]
+
+        return self   
 
 
     def __repr__(self):
@@ -215,25 +230,6 @@ print(mx.get_line_Ax(2))
 ###############
 #TESTING STUFF#
 ###############
-
-def switch(Li, Lj, Matrix):
-    """ Switches the position of Li and Lj in the Matrix
-
-        Args:
-            Li,Lj -- list -- lines of the matrix
-            Matrix -- list of lists -- matirx
-        
-        return the Matrix
-    """
-    i = Matrix.index(Li)
-    j = Matrix.index(Lj)
-
-    Matrix[i] = Lj
-    Matrix[j] = Li
-
-    return Matrix
-
-
 
 def is_simplified(Matrix):
     """ Checks if the Matrix is simplified
