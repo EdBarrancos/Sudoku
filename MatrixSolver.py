@@ -114,6 +114,18 @@ class Matrix:
         return {'y': len(self.get_collumn(0)),'x': len(self.matrix['Ax']) + 1}
     
 
+    def get_line_Ax(self, line_nbr):
+        '''Returns only the Ax part of the line
+
+        Args:
+            line_nbr -- int -- number of the line
+
+        return list
+        '''
+        line = self.get_line(line_nbr)
+
+        return line[:-1]
+
     def change_line(self, line_nbr, new_line):
         '''Changes destroctively the line in the line_nbr with new_line
 
@@ -195,9 +207,10 @@ a = [0,1,0,4]
 
 b = [1,0,0,3]
 
-c = [0,1,2,7]
+c = [0,1,1,7]
 
 mx = Matrix([a,b,c])
+print(mx.get_line_Ax(2))
 
 ###############
 #TESTING STUFF#
