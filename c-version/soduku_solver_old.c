@@ -1,39 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <stdarg.h>
 
-/*This Program still cant solve the most difficult problems, because he doesn't have a function that does like in this line the only one that can have nbr 5 is x square*/
-/*But I'll put it on hold and come back some other day*/
-/*Have a way of putting in the sudoku, but it needs some teaks here and there*/
-/*Working in the solving of more difficult sudokus*/
-/*The lines and the collums are done, need to figure out one for the squares*/
-/*Squares done*/
-/*Lacks testing*/
-/*Lots of mistakes, majorly ifs withount "()"*/
-/*Corrected that stuff*/
-/*The squares are the ones messed up*/
-/*Debuged*/
-/*Fixed everything*/
-/*Solved a medium difficulty*/
-/*Testing a hard one*/
-/*It got one worng*/
-/*Parenting out last debug and start new one*/
-/*Found problem in section lines*/
-/*Tried to correct it*/
-/*Problem in collums and possibly in lines*/
-/*Esquece, eu e que sou burro*/
-/*Problem probably in lines*/
-/*No, actualy its in the squares*/
-
-
-/*Polish stuff*/
-/*Mudar as listas do tst_lines para serem em vez de 9, passarem a ser so uma bidimensional*/
-/*Check if all variables are really needed*/
-/*The part in tst_collums where it crosses all the lists could use a little improvement*/
+#define CLEAR(var) var[0] = '\0'
+#define FALSE 0
+#define TRUE 1
 
 int tst(int h,int g[9][9],int x,int y,int kind,int array_passage);
 int tst_lines(int g[9][9],int y,int x);
 int tst_collums(int g[9][9],int y,int x);
 int tst_squares(int g[9][9],int x,int y,int x_s,int y_s);
+
+void throw_error(const char *fmt, ...){
+  va_list args;
+  va_start(args, fmt);
+
+  fflush(stdout);
+
+  fprintf(stderr, RED);
+  vfprintf(stderr, fmt, args);
+  fprintf(stderr, "\n");
+  if (errno)
+    fprintf(stderr, "\t%s\n", strerror(errno));
+  fprintf(stderr, NC);
+
+  exit(0);
+
+  va_end(args);
+}
+
+void parse_args(int *debug, int argc, char *argv[]){
+    if(argc > 2){
+        throw_error("Invalid Number of Arguments");
+        return;
+    }
+
+    if(argc == 1)
+        *debug = FALSE;
+    else    
+        *debug = TRUE;
+}
 
 
 int main(int argc, char *argv[])
