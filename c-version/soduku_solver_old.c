@@ -36,7 +36,7 @@ int tst_collums(int g[9][9],int y,int x);
 int tst_squares(int g[9][9],int x,int y,int x_s,int y_s);
 
 
-int main()
+int main(int argc, char *argv[])
 {
     int r;
     int last_r = 0;
