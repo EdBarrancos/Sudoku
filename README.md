@@ -24,4 +24,4 @@ The *"make clean"* can be used to clean the binary file.
 
 ## Python Version
 
-In progress
+**In progress**
