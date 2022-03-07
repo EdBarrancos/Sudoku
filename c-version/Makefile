@@ -13,3 +13,6 @@ sudoku: $(C_FILES)
 
 clean:
 	rm sudoku
+
+run:
+	./sudoku
