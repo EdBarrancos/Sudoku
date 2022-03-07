@@ -74,9 +74,6 @@ int main(int argc, char *argv[])
                         6,8,0,1,3,0,0,0,0,
                         0,0,4,0,0,0,1,0,0,
                         0,1,9,0,0,0,5,0,0};
-
-    printf("Please, input the sudoku table that needs solving:");
-    printf("\n");
     
 
     /*Main loop that will only stop when the sudoku is solved*/
@@ -91,14 +88,14 @@ int main(int argc, char *argv[])
                     
                     sudoku[y][x] = tst(sudoku[y][x],sudoku,x,y,0,0);
                     
-                    if (sudoku[y][x] != 0){
+                    if (sudoku[y][x] != 0 && debug){
                         printf("x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
                     }
                 }
             }
         }
 
-        if(runs == 0){
+        if(runs == 0 && debug){
             printf("\n");
         }
 
@@ -109,13 +106,13 @@ int main(int argc, char *argv[])
                     
                     sudoku[y][x] = tst_lines(sudoku,y,x);
                     
-                    if (sudoku[y][x] != 0){
+                    if (sudoku[y][x] != 0 && debug){
                         printf("x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
                     }
                 }
             }
         }
-        if(runs == 0){
+        if(runs == 0 && debug){
             printf("\n");
         }
 
@@ -125,13 +122,13 @@ int main(int argc, char *argv[])
                     
                     sudoku[y][x] = tst(sudoku[y][x],sudoku,x,y,0,0);
                     
-                    if (sudoku[y][x] != 0){
+                    if (sudoku[y][x] != 0 && debug){
                         printf("x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
                     }
                 }
             }
         }
-        if(runs == 0){
+        if(runs == 0 && debug){
             printf("\n");
         }
 
@@ -142,7 +139,7 @@ int main(int argc, char *argv[])
                     
                     sudoku[y][x] = tst_collums(sudoku,y,x);
                     
-                    if (sudoku[y][x] != 0){
+                    if (sudoku[y][x] != 0 && debug){
                         printf("x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
                     }
                 }
@@ -155,7 +152,7 @@ int main(int argc, char *argv[])
                     
                     sudoku[y][x] = tst(sudoku[y][x],sudoku,x,y,0,0);
                     
-                    if (sudoku[y][x] != 0){
+                    if (sudoku[y][x] != 0 && debug){
                         printf("x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
                     }
                 }
@@ -176,11 +173,11 @@ int main(int argc, char *argv[])
                             break;
                         }
                     }
-                    if((y == 1) && (x == 4)){
+                    if((y == 1) && (x == 4) && debug){
                         printf("Testing squares x:%d, y:%d, value:%d, x_s:%d, y_s:%d\n\n",x,y,sudoku[y][x],x_s,y_s);
                     }
                     sudoku[y][x] = tst_squares(sudoku,x,y,x_s,y_s);
-                    if(runs == 0){
+                    if(runs == 0 && debug){
                         printf("Tested squares x:%d, y:%d, value:%d, x_s:%d, y_s:%d\n",x,y,sudoku[y][x],x_s,y_s);
                     }
                 }
