@@ -4,9 +4,14 @@
 #include <errno.h>
 #include <stdarg.h>
 
+#define ARG_NUM 1
+
 #define CLEAR(var) var[0] = '\0'
 #define FALSE 0
 #define TRUE 1
+
+#define RED "\033[0;31m"
+#define NC "\033[0m" 
 
 int tst(int h,int g[9][9],int x,int y,int kind,int array_passage);
 int tst_lines(int g[9][9],int y,int x);
@@ -32,20 +37,26 @@ void throw_error(const char *fmt, ...){
 }
 
 void parse_args(int *debug, int argc, char *argv[]){
-    if(argc > 2){
+    if(argc > (ARG_NUM + 1)){
         throw_error("Invalid Number of Arguments");
         return;
     }
 
-    if(argc == 1)
-        *debug = FALSE;
-    else    
-        *debug = TRUE;
+    *debug = FALSE;
+
+    for(int i = 1; i < argc; i++){
+        if(strcmp(argv[i], "-d") == 0)
+            *debug = TRUE;
+    }      
 }
 
 
 int main(int argc, char *argv[])
 {
+    int debug;
+
+    parse_args(&debug, argc, argv);
+    
     int r;
     int last_r = 0;
     int x,y;
