@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     int debug;
 
     parse_args(&debug, argc, argv);
-    
+
     int r;
     int last_r = 0;
     int x,y;
@@ -77,12 +77,7 @@ int main(int argc, char *argv[])
 
     printf("Please, input the sudoku table that needs solving:");
     printf("\n");
-    /*for(y = 0;y <= 8;y++){
-        for(x = 0;x <= 8;x++){
-            scanf("%d",&sudoku[y][x]);
-        }
-        printf("\n");
-    }*/
+    
 
     /*Main loop that will only stop when the sudoku is solved*/
     do{
@@ -93,34 +88,27 @@ int main(int argc, char *argv[])
         for(y = 0;y < 9;y++){
             for(x = 0;x < 9;x++){
                 if (sudoku[y][x] == 0){
-                    /*if ((y == 0) && (x == 2)){
-                        printf("Testing x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
-                    }*/
+                    
                     sudoku[y][x] = tst(sudoku[y][x],sudoku,x,y,0,0);
-                    /*if ((y == 0) && (x == 2)){*/
-                    /*if(runs == 0){
-                        printf("Testing x:%d, y:%d, value:%d",x,y,sudoku[y][x]);
-                    }*/
+                    
                     if (sudoku[y][x] != 0){
                         printf("x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
                     }
                 }
             }
         }
+
         if(runs == 0){
             printf("\n");
         }
+
         /*Test lines*/
         for(y = 0;y < 9;y++){
             for(x = 0;x < 9;x++){
                 if(sudoku[y][x] == 0){
-                    /*if ((y == 0) && (x == 2)){
-                        printf("Testing lines x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
-                    }*/
+                    
                     sudoku[y][x] = tst_lines(sudoku,y,x);
-                    /*if (runs == 0){
-                        printf("Tested lines x:%d, y:%d, value:%d",x,y,sudoku[y][x]);
-                    }*/
+                    
                     if (sudoku[y][x] != 0){
                         printf("x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
                     }
@@ -134,13 +122,9 @@ int main(int argc, char *argv[])
         for(y = 0;y < 9;y++){
             for(x = 0;x < 9;x++){
                 if (sudoku[y][x] == 0){
-                    /*if ((y == 0) && (x == 2)){
-                        printf("Testing x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
-                    }*/
+                    
                     sudoku[y][x] = tst(sudoku[y][x],sudoku,x,y,0,0);
-                    /*if (runs == 0){
-                        printf("Tested x:%d, y:%d, value:%d",x,y,sudoku[y][x]);
-                    }*/
+                    
                     if (sudoku[y][x] != 0){
                         printf("x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
                     }
@@ -155,13 +139,9 @@ int main(int argc, char *argv[])
         for(y = 0;y < 9;y++){
             for(x = 0;x < 9;x++){
                 if(sudoku[y][x] == 0){
-                    /*if ((y == 0) && (x == 2)){
-                        printf("Testing collums x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
-                    }*/
+                    
                     sudoku[y][x] = tst_collums(sudoku,y,x);
-                    /*if (runs == 0){
-                        printf("Tested collums x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
-                    }*/
+                    
                     if (sudoku[y][x] != 0){
                         printf("x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
                     }
@@ -172,13 +152,9 @@ int main(int argc, char *argv[])
         for(y = 0;y < 9;y++){
             for(x = 0;x < 9;x++){
                 if (sudoku[y][x] == 0){
-                    /*if ((y == 0) && (x == 2)){
-                        printf("Testing x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
-                    }*/
+                    
                     sudoku[y][x] = tst(sudoku[y][x],sudoku,x,y,0,0);
-                    /*if (runs == 0){
-                        printf("Tested x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
-                    }*/
+                    
                     if (sudoku[y][x] != 0){
                         printf("x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
                     }
@@ -214,13 +190,8 @@ int main(int argc, char *argv[])
         for(y = 0;y < 9;y++){
             for(x = 0;x < 9;x++){
                 if (sudoku[y][x] == 0){
-                    /*if ((y == 0) && (x == 2)){
-                        printf("Testing x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
-                    }*/
+                    
                     sudoku[y][x] = tst(sudoku[y][x],sudoku,x,y,0,0);
-                    /*if (runs == 0){
-                        printf("Tested x:%d, y:%d, value:%d\n",x,y,sudoku[y][x]);
-                    }*/
                 }
             }
         }
@@ -458,21 +429,6 @@ int tst_lines(int g[9][9],int y,int x){
         }
     }
 
-    /*if((y == 5) && (x == 3)){
-        printf("Lets print all lines\n");
-        for(y_c = 0;y_c < 9;y_c++){
-            printf("Lista numero %d:",y_c);
-            for(x_c = 0;x_c < 9;x_c++){
-                printf("%d,",h[y_c][x_c]);
-            }
-            printf("\n");
-        }
-    }
-
-    if((y == 5) && (x == 3)){
-        printf("%d\n\n",x);
-    }*/
-
 
     /*Cross the lists*/
     for(y_c = 0;y_c <= 8;y_c++){
@@ -486,12 +442,6 @@ int tst_lines(int g[9][9],int y,int x){
             }
         }
     }
-
-    /*if((y == 5) && (x == 3)){
-        for(x_c = 0;x_c <= 8;x_c++){
-            printf("%d",h[x][x_c]);
-        }
-    }*/
 
     /*See if we got a conclusion*/
     counter = 0;
