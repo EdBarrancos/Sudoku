@@ -58,4 +58,3 @@ else:
     print(f'{BOLD}{OKGREEN}\tTEST PASSED -> TOTAL: {test_statistics["total"]} | PASSED: {test_statistics["passed"]} | FAILED: {test_statistics["failed"]}')
     
 print()
-print()
