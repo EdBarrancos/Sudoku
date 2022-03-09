@@ -1,8 +1,8 @@
-from cgi import test
 import difflib
 import subprocess
 import os
 from glob import glob
+import sys
 
 
 HEADER = '\033[95m'
@@ -33,8 +33,11 @@ test_statistics = {"total": 0, "failed": 0, "passed": 0}
 for file in FILES:
     test_statistics["total"] += 1
     _,name = os.path.split(file)
-    print(f'{OKBLUE}{name.upper()} --| {ENDC}')
-    os.system(f"python3 src/main.py {file} tests/tmp/{name}")
+    print(f'  {OKBLUE}{name.upper()} --| {ENDC}')
+    args = ""
+    for arg in sys.argv[1:]:
+        args += str(arg)
+    os.system(f"python3 src/main.py {file} tests/tmp/{name} {args}")
     
     output = open(f"tests/outputs/{name}").readlines()
     tmp = open(f"tests/tmp/{name}").readlines()
@@ -48,8 +51,6 @@ for file in FILES:
         test_statistics["passed"] += 1
     else:
         test_statistics["failed"] += 1
-
-print()
 
 if test_statistics["failed"] > 0:
     print(f'{BOLD}{OKRED}\tTEST FAILED -> TOTAL: {test_statistics["total"]} | PASSED: {test_statistics["passed"]} | FAILED: {test_statistics["failed"]}')
