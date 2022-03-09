@@ -18,9 +18,9 @@ UNDERLINE = '\033[4m'
 @total_ordering
 class Level(Enum):
     ZERO = 1
-    INFO = 2
+    ERROR = 2
     DEBUG = 3
-    ERROR = 4
+    INFO = 4
 
     def __lt__(self, other):
         if self.__class__ is other.__class__:
