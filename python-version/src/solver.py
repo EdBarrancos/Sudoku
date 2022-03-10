@@ -15,6 +15,7 @@ class Point:
     
     def CalculateSquare(self):
         # TODO -> Finish
+        Logging.Error("Calculate Point's Square not implemented yet")
         pass
     
     def IsSet(self):
@@ -22,6 +23,7 @@ class Point:
     
     def UpdateValue(self):
         # TODO -> Finish
+        Logging.Error("Update Point's Value not implemented yet")
         pass
 
     def __str__(self) -> str:
@@ -39,6 +41,8 @@ class Sudoku:
                 - As a One Liner or a Matrix
         """
 
+        Logging.Section("SET_UP")
+
         self.points = list()
 
         if len(raw_sudoku) == 1:
@@ -49,18 +53,26 @@ class Sudoku:
             self.CreateTableFromMatrix(raw_sudoku)
 
     def CreateTableFromOneLiner(self, raw_sudoku):
-        for index in range(raw_sudoku[0]):
+        for index in range(len(raw_sudoku[0])):
+            Logging.Info(f'Creating from index: {index}')
+            y = index // 9
+            x = index - (9 * y)
+
             if raw_sudoku[0][index].isdigit():
-                y = int(index % 9)
-                x = index - (9 * y)
-                point = Point(x, y, int(raw_sudoku[0][index]))
+                value = int(raw_sudoku[0][index])
+            else:
+                value = 0
+            
+            point = Point(x, y, value)
 
-                Logging.Debug(f'Point: {point} created')
+            Logging.Debug(f'Point: {point} created')
 
-                self.points.append(point)
+            self.points.append(point)
+            
         
     def CreateTableFromMatrix(self, raw_sudoku):
         # TODO -> FINISH
+        Logging.Error("Create Table From Matrix not implemented yet")
         pass
 
 
@@ -95,6 +107,7 @@ class Sudoku:
 
     def CheckPoint(self, point):
         # TODO -> Finish
+        Logging.Error("Check Point not implemented yet")
         pass
 
     def StrOneLiner(self):
@@ -104,6 +117,7 @@ class Sudoku:
 
     def StrMatrix(self):
         # TODO -> Finish
+        Logging.Error("Soduku to matrix str not implemented yet")
         pass
 
     def __str__(self) -> str:
