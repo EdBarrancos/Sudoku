@@ -1,6 +1,7 @@
 from distutils.log import Log
 import sys
 from log import *
+from solver import *
 
 MIN_ARGS = 2
 MAX_ARGS = 4
@@ -38,8 +39,10 @@ if __name__ == "__main__":
     #############
     # MAIN CODE #
     #############
+
+    solver = Sudoku(fin.read().split("\n"))
     
-    print("#RESULT#", file=output)
+    print(f'{solver.Solve()}', file=output)
 
     #############
     # MAIN CODE #
