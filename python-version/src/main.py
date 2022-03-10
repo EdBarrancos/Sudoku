@@ -1,4 +1,3 @@
-from distutils.log import Log
 import sys
 from log import *
 from solver import *
