@@ -30,6 +30,9 @@ print(f"\n\t -----------------", f"\n\t{BOLD}{UNDERLINE}TESTING ./src/main.py{EN
 
 test_statistics = {"total": 0, "failed": 0, "passed": 0}
 
+for file in glob("tests/tmp/*"):
+    os.system(f"rm {file}")
+
 for file in FILES:
     test_statistics["total"] += 1
     _,name = os.path.split(file)
