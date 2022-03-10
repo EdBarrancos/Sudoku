@@ -1,13 +1,21 @@
 from log import *
+from enum import Enum
+
+class TableStyles(Enum):
+    one_liner = 1
+    matrix = 2
 
 class Point:
-    def __init__(self) -> None:
+    def __init__(self, x, y, value) -> None:
+        self.x = x
+        self.y = y
+        self.square = self.CalculateSquare()
+        self.value = value
+        self.set = False if self.value == 0 else True
+    
+    def CalculateSquare(self):
         # TODO -> Finish
-        self.x = 0
-        self.y = 0
-        self.square = 0
-        self.value = 0
-        self.set = False
+        pass
     
     def IsSet(self):
         return self.set
@@ -16,26 +24,57 @@ class Point:
         # TODO -> Finish
         pass
 
+    def __str__(self) -> str:
+        return f'({self.x},{self.y}) in square: {self.square} with value: {self.value}'
+
 class Sudoku:
-    def __init__(self) -> None:
-        self.sudoku = self.CreateTable()
+    def __init__(self, raw_sudoku) -> None:
+        self.sudoku = self.CreateTable(raw_sudoku)
     
-    def CreateTable(self):
+    def CreateTable(self, raw_sudoku):
+        """ Creates The Table From strings
+
+            Formating Rules:
+                - Empty spaces as 0's or other characters besides numbers
+                - As a One Liner or a Matrix
+        """
+
         self.points = list()
+
+        if len(raw_sudoku) == 1:
+            self.style = TableStyles.one_liner
+            self.CreateTableFromOneLiner(raw_sudoku)
+        else:
+            self.style = TableStyles.matrix
+            self.CreateTableFromMatrix(raw_sudoku)
+
+    def CreateTableFromOneLiner(self, raw_sudoku):
+        for index in range(raw_sudoku[0]):
+            if raw_sudoku[0][index].isdigit():
+                y = int(index % 9)
+                x = index - (9 * y)
+                point = Point(x, y, int(raw_sudoku[0][index]))
+
+                Logging.Debug(f'Point: {point} created')
+
+                self.points.append(point)
+        
+    def CreateTableFromMatrix(self, raw_sudoku):
         # TODO -> FINISH
         pass
 
+
     def Solve(self, listPoints):
-        actions = list(9)
+        actions = list()
         for point in listPoints:
             if not point.IsSet():
-                Logging.Info("Add to point as changed")
+                Logging.Info("Add point as changed")
                 actions.append(point)
                 
                 Logging.Info("Change it until it fits if we reach 0 -> Fix Others")
                 while(not self.CheckPoint(point)):
                     if not self.UpdatePoint(point):
-                        self.FixActions(actions, len(actions) - 2)
+                        self.FixActions(actions, len(actions) - 2) #Point to the last to the end
 
         Logging.Debug("Finished")
         return self
@@ -58,7 +97,16 @@ class Sudoku:
         # TODO -> Finish
         pass
 
-    def __str__(self) -> str:
+    def StrOneLiner(self):
+        result = str()
+        for point in self.points:
+            result.append(point.value)
+
+    def StrMatrix(self):
         # TODO -> Finish
         pass
+
+    def __str__(self) -> str:
+        if self.style == TableStyles.one_liner: return self.StrOneLiner()
+        elif self.style == TableStyles.matrix: return self.StrMatrix()
 
