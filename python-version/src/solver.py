@@ -26,10 +26,21 @@ class Point:
         Logging.Error("Update Point's Value not implemented yet")
         pass
 
+    def __eq__(self, __o: object) -> bool:
+        if isinstance(__o, Point):
+            #If Points have the same coordenates, their the same point
+            return self.x == __o.x and self.y == __o.y
+        return False
+    
+    def __ne__(self, __o: object) -> bool:
+        return not self.__eq__(__o)
+
     def __str__(self) -> str:
         return f'({self.x},{self.y}) in square: {self.square} with value: {self.value}'
 
 class Sudoku:
+    sudoku_size = 9
+
     def __init__(self, raw_sudoku) -> None:
         self.sudoku = self.CreateTable(raw_sudoku)
     
@@ -55,8 +66,8 @@ class Sudoku:
     def CreateTableFromOneLiner(self, raw_sudoku):
         for index in range(len(raw_sudoku[0])):
             Logging.Info(f'Creating from index: {index}')
-            y = index // 9
-            x = index - (9 * y)
+            y = index // Sudoku.sudoku_size
+            x = index - (Sudoku.sudoku_size * y)
 
             if raw_sudoku[0][index].isdigit():
                 value = int(raw_sudoku[0][index])
@@ -107,7 +118,39 @@ class Sudoku:
 
     def CheckPoint(self, point):
         # TODO -> Finish
+
+        Logging.Section("CHECK")
+
         Logging.Error("Check Point not implemented yet")
+
+
+        pass
+
+    def CheckPointLine(self, point):
+        Logging.Section("CHECK LINE")
+
+        Logging.Debug(f"Checking {point}")
+        Logging.Info("Could use some performance improvements")
+
+        check = True
+        p_checked = 0
+        for p in self.points:
+            if p == point:
+                continue
+            if p.y == point.y:
+                p_checked += 1
+                check = False if p.value == point.value else True
+            if p_checked == Sudoku.sudoku_size:
+                break
+
+        Logging.Debug(f'{check}')
+
+        return check
+
+    def CheckPointCollumn(self, point):
+        pass
+
+    def CheckPointSquare(self, point):
         pass
 
     def StrOneLiner(self):
