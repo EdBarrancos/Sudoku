@@ -117,14 +117,9 @@ class Sudoku:
         # TODO -> Visuals Update Shananigans
 
     def CheckPoint(self, point):
-        # TODO -> Finish
-
         Logging.Section("CHECK")
 
-        Logging.Error("Check Point not implemented yet")
-
-
-        pass
+        return self.CheckPointLine(point) and self.CheckPointCollumn(point) and self.CheckPointSquare(point)
 
     def CheckPointLine(self, point):
         Logging.Section("CHECK LINE")
@@ -148,10 +143,46 @@ class Sudoku:
         return check
 
     def CheckPointCollumn(self, point):
-        pass
+        Logging.Section("CHECK COLLUMN")
+
+        Logging.Debug(f"Checking {point}")
+        Logging.Info("Could use some performance improvements")
+
+        check = True
+        p_checked = 0
+        for p in self.points:
+            if p == point:
+                continue
+            if p.x == point.x:
+                p_checked += 1
+                check = False if p.value == point.value else True
+            if p_checked == Sudoku.sudoku_size:
+                break
+
+        Logging.Debug(f'{check}')
+
+        return check
 
     def CheckPointSquare(self, point):
-        pass
+        Logging.Section("CHECK SQUARE")
+
+        Logging.Debug(f"Checking {point}")
+        Logging.Info("Could use some performance improvements")
+
+        check = True
+        p_checked = 0
+        for p in self.points:
+            if p == point:
+                continue
+            if p.square == point.square:
+                p_checked += 1
+                check = False if p.value == point.value else True
+            if p_checked == Sudoku.sudoku_size:
+                break
+
+        Logging.Debug(f'{check}')
+
+        return check
 
     def StrOneLiner(self):
         result = str()
