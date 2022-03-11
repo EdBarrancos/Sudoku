@@ -25,7 +25,8 @@ def PrintPass(name):
     print(f'{OKGREEN}{BOLD}\t-->\t{name.upper()} PASSED{ENDC}\n\n')
 
 FILES = glob("tests/inputs/*")
-os.mkdir("tests/tmp")
+if not os.path.exists("tests/tmp"):
+    os.mkdir("tests/tmp")
 
 print(f"\n\t -----------------", f"\n\t{BOLD}{UNDERLINE}TESTING ./src/main.py{ENDC}\n",f"\t-----------------\n\n")
 
