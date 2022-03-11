@@ -127,6 +127,9 @@ class Sudoku:
                 self.FixActions(actions, pointer - 1)
         
     def UpdatePoint(self, point : Point):
+        Logging.Section("UPDATE")
+
+        Logging.Visual(str(self))
         # TODO -> Visuals Update Shananigans
         return point.UpdateValue()
 

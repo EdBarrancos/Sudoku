@@ -18,9 +18,10 @@ UNDERLINE = '\033[4m'
 @total_ordering
 class Level(Enum):
     ZERO = 1
-    ERROR = 2
-    DEBUG = 3
-    INFO = 4
+    VISUAL = 2
+    ERROR = 3
+    DEBUG = 4
+    INFO = 5
 
     def __lt__(self, other):
         if self.__class__ is other.__class__:
@@ -53,6 +54,11 @@ class Logging:
         Logging.currentColorI += 1
         if Logging.currentColorI >= len(colors):
             Logging.currentColorI = 0
+    
+    def Visual(message : str):
+        if Logging.level >= Level.VISUAL:
+            Logging.CheckForNewSection()
+            print(f'{colors[Logging.currentColorI]}[{Logging.section}]{ENDC} {message} ')
 
     def Error(message : str):
         if Logging.level >= Level.ERROR:

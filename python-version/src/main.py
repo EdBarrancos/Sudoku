@@ -16,6 +16,8 @@ def ParseArgs():
     #Initialize Output
     output = sys.stdout
 
+    # TODO -> Fix if no output
+
     if len(sys.argv) >= 3:
         output = open(sys.argv[2], mode="w")
     
@@ -27,6 +29,8 @@ def ParseArgs():
             Logging.SetUp(Level.DEBUG)
         elif sys.argv[3] == "-e":
             Logging.SetUp(Level.ERROR)
+        elif sys.argv[3] == "-v":
+            Logging.SetUp(Level.VISUAL)
 
     return output
 
