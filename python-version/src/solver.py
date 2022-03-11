@@ -9,22 +9,30 @@ class Point:
     def __init__(self, x, y, value) -> None:
         self.x = x
         self.y = y
-        self.square = self.CalculateSquare()
+        self.CalculateSquare()
         self.value = value
         self.set = False if self.value == 0 else True
     
     def CalculateSquare(self):
-        # TODO -> Finish
-        Logging.Error("Calculate Point's Square not implemented yet")
-        pass
+        self.square = self.x // Sudoku.square_size + (self.y // Sudoku.square_size * 3)
     
     def IsSet(self):
         return self.set
     
     def UpdateValue(self):
-        # TODO -> Finish
-        Logging.Error("Update Point's Value not implemented yet")
-        pass
+        Logging.Section("UPDATE VALUE")
+
+        self.value += 1
+        if self.value > 9:
+            self.value = 0
+
+            Logging.Debug(f"New Value: {self.value}")
+            
+            return False
+
+        Logging.Debug(f"New Value: {self.value}")
+
+        return True
 
     def __eq__(self, __o: object) -> bool:
         if isinstance(__o, Point):
@@ -40,6 +48,7 @@ class Point:
 
 class Sudoku:
     sudoku_size = 9
+    square_size = 3
 
     def __init__(self, raw_sudoku) -> None:
         self.sudoku = self.CreateTable(raw_sudoku)
@@ -87,9 +96,9 @@ class Sudoku:
         pass
 
 
-    def Solve(self, listPoints):
+    def Solve(self):
         actions = list()
-        for point in listPoints:
+        for point in self.points:
             if not point.IsSet():
                 Logging.Info("Add point as changed")
                 actions.append(point)
@@ -112,9 +121,9 @@ class Sudoku:
             if not self.UpdatePoint(actions[pointer]):
                 self.FixActions(actions, pointer - 1)
         
-    def UpdatePoint(point):
-        point.UpdateValue()
+    def UpdatePoint(self, point : Point):
         # TODO -> Visuals Update Shananigans
+        return point.UpdateValue()
 
     def CheckPoint(self, point):
         Logging.Section("CHECK")
@@ -187,7 +196,8 @@ class Sudoku:
     def StrOneLiner(self):
         result = str()
         for point in self.points:
-            result.append(point.value)
+            result += str(point.value)
+        return result
 
     def StrMatrix(self):
         # TODO -> Finish
