@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     solver = Sudoku(fin.read().split("\n"))
     
-    print(f'{solver.Solve()}', file=output)
+    print(f'{solver.Solve()}',end="", file=output)
 
     #############
     # MAIN CODE #
