@@ -99,6 +99,8 @@ class Sudoku:
     def Solve(self):
         actions = list()
         for point in self.points:
+
+            Logging.Section("SOLVING")
             if not point.IsSet():
                 Logging.Info("Add point as changed")
                 actions.append(point)
@@ -117,6 +119,9 @@ class Sudoku:
         if pointer == -1:
             Logging.Error("Unsolvable Soduku")
 
+        if not self.UpdatePoint(actions[pointer]):
+                self.FixActions(actions, pointer - 1)
+
         while(not self.CheckPoint(actions[pointer])):
             if not self.UpdatePoint(actions[pointer]):
                 self.FixActions(actions, pointer - 1)
@@ -127,6 +132,9 @@ class Sudoku:
 
     def CheckPoint(self, point):
         Logging.Section("CHECK")
+
+        if point.value == 0:
+            return False
 
         return self.CheckPointLine(point) and self.CheckPointCollumn(point) and self.CheckPointSquare(point)
 
@@ -143,7 +151,9 @@ class Sudoku:
                 continue
             if p.y == point.y:
                 p_checked += 1
-                check = False if p.value == point.value else True
+                if p.value == point.value:
+                    check = False
+                    break
             if p_checked == Sudoku.sudoku_size:
                 break
 
@@ -164,7 +174,9 @@ class Sudoku:
                 continue
             if p.x == point.x:
                 p_checked += 1
-                check = False if p.value == point.value else True
+                if p.value == point.value:
+                    check = False
+                    break
             if p_checked == Sudoku.sudoku_size:
                 break
 
@@ -185,7 +197,9 @@ class Sudoku:
                 continue
             if p.square == point.square:
                 p_checked += 1
-                check = False if p.value == point.value else True
+                if p.value == point.value:
+                    check = False
+                    break
             if p_checked == Sudoku.sudoku_size:
                 break
 
