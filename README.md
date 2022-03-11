@@ -56,7 +56,7 @@ If no output file is provided, the program will print the solution on the consol
 
 The output will be in the same format as the one in the input. *Either in a matrix set up or all in a single line*
 
-Regarding the Input *Empty Cells in the puzzle should have 0's or other characters besides digits*
+Regarding the Input *Empty Cells in the puzzle should have 0's or other characters besides digits* *Please Leave no spaces between Cells*
 
 #### Available Flags
 
@@ -90,6 +90,6 @@ It will run all the tests in the [input folder](python-version/tests/inputs), co
 
 ##### Adding More Tests
 
-Add a file in the [input folder](python-version/tests/inputs) with the intended sudoku puzzle. *Empty Cells in the puzzle should have 0's or other characters besides digits*
+Add a file in the [input folder](python-version/tests/inputs) with the intended sudoku puzzle. *Empty Cells in the puzzle should have 0's or other characters besides digits* *Please Leave no spaces between Cells*
 
 Then add a file to the [output folder](python-version/tests/outputs) with the same name as the first.
