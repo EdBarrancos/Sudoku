@@ -33,6 +33,7 @@ class Logging:
     section = "MAIN"
     level = Level.ZERO
     currentColorI = 0
+    newSection = False
 
 
     def SetUp(level_ : Level):
@@ -40,8 +41,13 @@ class Logging:
 
     def Section(sectionName : str):
         Logging.section = sectionName.upper()
-        print()
+        Logging.newSection = True
         Logging.nextColor()
+    
+    def CheckForNewSection():
+        if Logging.newSection:
+            print()
+            Logging.newSection = False
     
     def nextColor():
         Logging.currentColorI += 1
@@ -50,12 +56,15 @@ class Logging:
 
     def Error(message : str):
         if Logging.level >= Level.ERROR:
+            Logging.CheckForNewSection()
             print(f'{colors[Logging.currentColorI]}[{Logging.section}]{BOLD}{UNDERLINE}|ERROR|{ENDC} {message} ')
     
     def Debug(message : str):
         if Logging.level >= Level.DEBUG:
+            Logging.CheckForNewSection()
             print(f'{colors[Logging.currentColorI]}[{Logging.section}]{BOLD}|DEBUG|{ENDC} {message} ')
 
     def Info(message : str):
         if Logging.level >= Level.INFO:
+            Logging.CheckForNewSection()
             print(f'{colors[Logging.currentColorI]}[{Logging.section}]|INFO|{ENDC} {message} ')
