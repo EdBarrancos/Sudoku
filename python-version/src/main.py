@@ -16,21 +16,17 @@ def ParseArgs():
     #Initialize Output
     output = sys.stdout
 
-    # TODO -> Fix if no output
-
-    if len(sys.argv) >= 3:
-        output = open(sys.argv[2], mode="w")
-    
-    #Initialize Debugging Level
-    if len(sys.argv) >= 4:
-        if sys.argv[3] == "-i":
+    for i in range(2,len(sys.argv)):
+        if sys.argv[i] == "-i":
             Logging.SetUp(Level.INFO)
-        elif sys.argv[3] == "-d":
+        elif sys.argv[i] == "-d":
             Logging.SetUp(Level.DEBUG)
-        elif sys.argv[3] == "-e":
+        elif sys.argv[i] == "-e":
             Logging.SetUp(Level.ERROR)
-        elif sys.argv[3] == "-v":
+        elif sys.argv[i] == "-v":
             Logging.SetUp(Level.VISUAL)
+        else:
+            output = open(sys.argv[i], mode="w")
 
     return output
 
