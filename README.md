@@ -93,3 +93,13 @@ It will run all the tests in the [input folder](python-version/tests/inputs), co
 Add a file in the [input folder](python-version/tests/inputs) with the intended sudoku puzzle. *Empty Cells in the puzzle should have 0's or other characters besides digits* *Please Leave no spaces between Cells*
 
 Then add a file to the [output folder](python-version/tests/outputs) with the same name as the first.
+
+###### Using createTests
+
+```python3 tests/createTests.py```
+
+Then introduce the name of the tests to be created. All the following created tests will have that name and a number following it.
+
+Then, in a loop, type out the input, then output, then input again.
+
+To stop type *"-1"* on the input section
